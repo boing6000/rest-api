@@ -3,6 +3,7 @@
 namespace Boing\RestApi;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RestApiServiceProvider extends ServiceProvider
 {
@@ -13,15 +14,11 @@ class RestApiServiceProvider extends ServiceProvider
                 'boing-rest-api.php'
             )
         ]);
-        
-		/*if (! $this->app->routesAreCached()) {
-            require __DIR__.'/routes.php';
-        }*/
-	
 		
-		$this->app['router']->group(['namespace' => 'Boing\RestApi\Controllers'], function () {
-            require __DIR__.'/routes.php';
-        });
+		Route::prefix('api')
+             ->middleware('api')
+             ->namespace('Boing\RestApi\Controllers')
+             ->group(__DIR__.'/routes.php');
     }
     public function register()
     {

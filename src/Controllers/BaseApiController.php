@@ -29,7 +29,6 @@ class BaseApiController extends Controller
     
     public function index()
     {
-		
         $query = Input::get();
         $this->repository = new BaseRepository($this->getModel());
 
@@ -100,6 +99,10 @@ class BaseApiController extends Controller
         return $this->response();
     }
 	
+	public function debug(){
+		dd(Route::getRoutes());
+	}
+	
 	public function toComboBox(LaraModel $model){
         $query = Input::get();
         $this->repository = new BaseRepository($model);
@@ -127,7 +130,8 @@ class BaseApiController extends Controller
      */
     protected function getModel()
     {
-        $model = Route::currentRouteName();
+        $model = explode('.', Route::currentRouteName());
+		$model = $model[1];
         $model = config('boing-rest-api.baseModel') . config('boing-rest-api.modelPrefix') . ucfirst(camel_case($model));
         return new $model();
     }

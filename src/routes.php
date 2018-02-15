@@ -1,16 +1,13 @@
 <?php
 $version = getConfig('apiVersion');
 
-genRoutes("api/$version");
+genRoutes($version);
 
 
 function genRoutes($baseName = '/') {
 	Route::group(['prefix' => $baseName], function(){
 		
-		Route::get('/', function(){
-			//dd(Route::getRoutes());
-			//dd(\Boing\Api\Controllers\BaseApiController::class);
-		});
+		Route::get('/', 'BaseApiController@debug');
 		
 		Route::group(['prefix' => 'auth/'], function() {
 			$authController = getConfig('authController');
@@ -40,16 +37,14 @@ function parseRoutes($models) {
         if($key === 'group') {
             parseGroup($value);
         }
-		
-		//dd('here');
     
-        Route::get("$key", "BaseApiController@index")->name($key);
-        Route::get("$key/{id}", "BaseApiController@show")->name($key);
-        Route::post("$key", "BaseApiController@create")->name($key);
-        Route::put("$key/{id}", "BaseApiController@update")->name($key);
-        Route::delete("$key/{id}", "BaseApiController@delete")->name($key);
-        Route::get("$key/trash/{id}", "BaseApiController@trash")->name($key);
-        Route::get("$key/trash/{id}/restore", "BaseApiController@restoreTrashed")->name($key);
-        Route::get("$key/trash/{id}/remove", "BaseApiController@removeTrashed")->name($key);
+        Route::get("$key", "BaseApiController@index")->name('api.' . $key . '.get');
+        Route::get("$key/{id}", "BaseApiController@show")->name('api.' . $key . '.get-id');
+        Route::post("$key", "BaseApiController@create")->name('api.' . $key . '.post');
+        Route::put("$key/{id}", "BaseApiController@update")->name('api.' . $key . '.put');
+        Route::delete("$key/{id}", "BaseApiController@delete")->name('api.' . $key . '.delete');
+        Route::get("$key/trash/{id}", "BaseApiController@trash")->name('api.' . $key . '.get-trash');
+        Route::get("$key/trash/{id}/restore", "BaseApiController@restoreTrashed")->name('api.' . $key . '.restore-trash');
+        Route::delete("$key/trash/{id}/remove", "BaseApiController@removeTrashed")->name('api.' . $key . '.delete-trash');
     }
 }
