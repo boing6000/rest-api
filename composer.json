@@ -1,0 +1,21 @@
+{
+  "name": "boing6000/rest-api",
+  "description": "This Laravel package allows you to create REST API based on your models",
+  "keywords": ["laravel", "rest", "api", "rest api", "generic rest api", "api generator"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andre Teodoro",
+      "email": "boing6000@gmail.com"
+    }
+  ],
+  "require": {
+	"sjdaws/vocal": "^2.0",
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Boing\\RestApi\\": "src"
+    }
+  }
+}
