@@ -14,7 +14,7 @@ return [
     "genericRoutes" => [
         [
             "options" => [
-                "middleware" => [""],
+                "middleware" => [],
                 "prefix"     => "/",
             ],
             "models"  => [
