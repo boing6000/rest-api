@@ -17,5 +17,12 @@
     "psr-4": {
       "Boing\\RestApi\\": "src"
     }
-  }
+  },
+  "extra": {
+        "laravel": {
+            "providers": [
+                "Boing\\RestApi\\RestApiServiceProvider"
+            ]
+        }
+    }
 }
