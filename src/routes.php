@@ -15,7 +15,8 @@ function genRoutes($baseName = '/') {
 			Route::delete('logout', "$authController@logout");
 			Route::get('ad', "$authController@activeDirectory");
 		});
-		if(count(getConfig('genericRoutes')) > 0){
+		$routes = getConfig('genericRoutes');
+		if(isset($routes) && count($routes) > 0){
 			foreach (getConfig('genericRoutes') as $key => $group) {
 				parseGroup($group);
 			}
